@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StarMartAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c7aa7eecdeb0d8a1d0e54105fc5b2b27875d41a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c78c3300666f3cda2fb02d6701eb900a037ee6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("StarMartAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StarMartAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,7 +4,7 @@ using StarMartAPI.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<StarMartContext>(options =>
-  options.UseSqlServer(
+  options.UseNpgsql(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options => {
