@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Starmart  Mall - Điểm đến cho mọi trải nghiệm">
+  <title>Starmart Shopping Mall | starmartmall.vn</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Icons miễn phí từ Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== HEADER TOP BAR ===== -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span><i class="fa fa-phone"></i> (028) 6685 4260</span>
+    <span><i class="fa fa-clock"></i> 09:30 - 22:00</span>
+  </div>
+  <div class="topbar-right">
+    <a href="#" class="lang active">VN</a>
+    <a href="#" class="lang">EN</a>
+    <a href="#"><i class="fa fa-search"></i></a>
+  </div>
+</div>
+
+<!-- ===== MAIN HEADER / LOGO + NAV ===== -->
+<header class="main-header">
+  <div class="logo">
+    <span class="logo-star">⭐</span>
+    <div class="logo-text">
+      <span class="logo-name">STARMART</span>
+      <span class="logo-sub">MALL</span>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <a href="index.html" class="active">Trang Chủ</a>
+    <a href="gioithieu.html">Giới Thiệu</a>
+    <a href="cuahang.html">Khu Vui Chơi - Giải Trí</a>
+    <a href="#">Ẩm Thực</a>
+    <a href="#">Ngân Hàng</a>
+    <a href="#">Coffee</a>
+    <a href="sukien.html">Khuyến Mãi</a>
+    <a href="sukien.html">Sự Kiện</a>
+    <a href="#">Tin Tức</a>
+    <a href="#">Tiện Ích</a>
+  </nav>
+</header>
+
+<!-- ===== HERO BANNER ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>ĐIỂM ĐẾN<br>CHO MỌI TRẢI NGHIỆM</h1>
+    <p>Giải Trí – Ẩm Thực – Tiện Ích</p>
+    <div class="hero-btns">
+      <a href="cuahang.html" class="btn-primary">Khám Phá Ngay →</a>
+      <a href="sukien.html" class="btn-outline">Xem Sự Kiện</a>
+    </div>
+  </div>
+  <!-- Slide dots -->
+  <div class="hero-dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<!-- ===== TIỆN ÍCH NỔI BẬT ===== -->
+<section class="features">
+  <div class="feature-grid">
+    <div class="feature-item">
+      <i class="fa fa-gamepad feature-icon"></i>
+      <h4>Khu Vui Chơi Giải Trí</h4>
+      <p>Rạp chiếu phim, khu vui chơi hiện đại cho mọi lứa tuổi</p>
+    </div>
+    <div class="feature-item">
+      <i class="fa fa-utensils feature-icon"></i>
+      <h4>Ẩm Thực</h4>
+      <p>Tinh hoa ẩm thực Thái - Hàn đa dạng và phong phú</p>
+    </div>
+    <div class="feature-item">
+      <i class="fa fa-university feature-icon"></i>
+      <h4>Ngân Hàng</h4>
+      <p>Giao dịch - Giải ngân nhanh chóng tiện lợi, an toàn</p>
+      </div>
+    <div class="feature-item">
+      <i class="fa fa-coffee feature-icon"></i>
+      <h4>Cafe Học Tập</h4>
+      <p>Không gian yên tĩnh, lý tưởng để học tập, làm việc, check-in sang chảnh</p>
+    </div>
+    <div class="feature-item">
+      <i class="fa fa-parking feature-icon icon-blue"></i>
+      <h4>Bãi Đỗ Xe Rộng Rãi</h4>
+      <p>Chỗ đỗ xe máy - ôtô an toàn, thuận tiện</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THƯƠNG HIỆU ===== -->
+<section class="brands">
+  <h2>THƯƠNG HIỆU NỔI BẬT TẠI STARMART MALL</h2>
+  <div class="brand-slider-wrap">
+    <button class="slider-btn left" onclick="slideBrands(-1)">&#8249;</button>
+    <div class="brand-track" id="brandTrack">
+      <div class="brand-item">Dookki</div>
+      <div class="brand-item">Lotteria</div>
+      <div class="brand-item">Starbucks</div>
+      <div class="brand-item">Focus Space</div>
+      <div class="brand-item">Beta Cinemas</div>
+      <div class="brand-item">Jump Arena</div>
+      <div class="brand-item">Shinhan Finance</div>
+      <div class="brand-item">Vikki Bank</div>
+    </div>
+    <button class="slider-btn right" onclick="slideBrands(1)">&#8250;</button>
+  </div>
+</section>
+
+<!-- ===== SỰ KIỆN NỔI BẬT ===== -->
+<section class="promo-section">
+  <div class="promo-grid" id="promoGrid">
+    <!-- JavaScript sẽ tự động điền từ API -->
+    <!-- Fallback tĩnh khi chưa có API: -->
+    <div class="promo-card red">
+      <div class="promo-label">ƯU ĐÃI LỚN CUỐI TUẦN</div>
+      <div class="promo-big">SALE UP TO<br><span>50%</span></div>
+      <p>Tại sự kiện các gian hàng</p>
+      <a href="sukien.html" class="btn-sm">XEM NGAY</a>
+    </div>
+    <div class="promo-card purple">
+      <div class="promo-label">KHU VUI CHƠI - GIẢI TRÍ HIỆN ĐẠI</div>
+      <p>Trải nghiệm vui chơi đỉnh cao cho cả gia đình</p>
+      <a href="#" class="btn-sm">XEM NGAY</a>
+    </div>
+    <div class="promo-card orange">
+        <div class="promo-label">Thiên Đường Ẩm Thực</div>
+      <p>Tinh hoa ẩm thực được chọn lọc</p>
+      <a href="#" class="btn-sm">XEM NGAY</a>
+    </div>
+    <div class="promo-card dark">
+      <div class="promo-label">Cafe Học Tập Yên Tĩnh</div>
+      <p>Không gian lý tưởng để học tập, làm việc hiệu quả, check-in sang chảnh</p>
+      <a href="#" class="btn-sm">XEM NGAY</a>
+    </div>
+  </div>
+</section>
+<!-- ===== SỰ KIỆN + TIN TỨC ===== -->
+<section class="news-section">
+  <div class="news-grid">
+    <!-- Cột trái: Sự kiện -->
+    <div>
+      <div class="section-header">
+        <h3>Sự Kiện Nổi Bật</h3>
+      </div>
+      <div id="eventList" class="event-list">
+        <!-- Điền bằng JavaScript từ API -->
+      </div>
+    </div>
+    <!-- Cột phải: Tin tức -->
+    <div>
+      <div class="section-header">
+        <h3>Tin Tức Mới</h3>
+        <a href="#" class="see-all">Xem tất cả →</a>
+      </div>
+      <div id="newsList" class="news-list">
+        <!-- Điền bằng JavaScript từ API -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-item">
+      <i class="fa fa-map-marker-alt"></i>
+      <div>
+        <strong>Địa Chỉ</strong>
+        <p>647 Quang Trung, Phường Thông Tây Hội</p>
+      </div>
+    </div>
+    <div class="footer-item">
+      <i class="fa fa-clock"></i>
+      <div>
+        <strong>Giờ Mở Cửa</strong>
+        <p>07:00 – 24:00<br>Thứ 2 – Chủ nhật</p>
+      </div>
+    </div>
+    <div class="footer-item">
+      <i class="fa fa-phone"></i>
+      <div>
+        <strong>Hotline</strong>
+        <p>(028) 6685 4260<br>Tư vấn & hỗ trợ</p>
+      </div>
+    </div>
+    <div class="footer-item">
+      <i class="fa fa-envelope"></i>
+      <div>
+        <strong>Email</strong>
+        <p>sieuthistarmart@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-social">
+      <strong>Kết Nối Với Chúng Tôi</strong>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-zaloOA"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Starmart Mall. Đã thông báo Bộ Công Thương.</p>
+    <p><a href="chinh-sach-bao-mat.html">Chính sách bảo mật</a> | <a href="dieu-khoan.html">Điều khoản sử dụng</a></p>
+  </div>
+</footer>
+<script src="js/app.js"></script>
+</body></html>
