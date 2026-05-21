@@ -18,7 +18,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// ✅ Bật Swagger mọi môi trường (không giới hạn Development)
 app.UseSwagger();
 app.UseSwaggerUI(c => {
   c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarMart API v1");
