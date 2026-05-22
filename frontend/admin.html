@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin – Starmart</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-wrap { max-width:700px; margin:60px auto; padding:0 20px; }
+    .login-box { background:white; padding:40px; border-radius:12px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.1); }
+    .form-group { margin-bottom:20px; }
+    .form-group label { display:block; font-weight:600; margin-bottom:6px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select { width:100%; padding:10px 14px; border:1px solid #ddd;
+      border-radius:6px; font-size:15px; font-family:Arial; }
+    .form-group textarea { height:100px; resize:vertical; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .btn-primary { background:#D0021B; color:white; border:none;
+      padding:12px 32px; border-radius:6px; font-size:15px;
+      font-weight:700; cursor:pointer; width:100%; }
+    .btn-primary:hover { background:#a80015; }
+    #message { margin-top:16px; padding:12px; border-radius:6px;
+      text-align:center; display:none; }
+    .msg-ok { background:#e8f5e9; color:#2e7d32; display:block!important; }
+    .msg-err { background:#ffebee; color:#c62828; display:block!important; }
+    .admin-header { background:#1B5EA6; color:white; padding:16px 40px;
+      display:flex; justify-content:space-between; align-items:center; }
+    .admin-header h2 { font-size:18px; }
+    .logout-btn { background:rgba(255,255,255,0.2); color:white;
+      border:none; padding:8px 16px; border-radius:4px; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="admin-wrap">
+    <div class="login-box">
+      <h2 style="text-align:center;margin-bottom:24px;color:#1B5EA6">
+        ⭐ Starmart Admin
+      </h2>
+      <div class="form-group">
+        <label>Tên đăng nhập</label>
+        <input type="text" id="username" placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <input type="password" id="password" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" onclick="login()">Đăng Nhập</button>
+      <div id="loginMsg" class="msg-err" style="display:none;margin-top:12px;
+        padding:10px;border-radius:6px;text-align:center;background:#ffebee;color:#c62828">
+        Sai tên đăng nhập hoặc mật khẩu!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="adminScreen" style="display:none">
+  <div class="admin-header">
+    <h2>⭐ Starmart Admin — Quản lý Tin Đăng</h2>
+    <button class="logout-btn" onclick="logout()">Đăng xuất</button>
+  </div>
+
+  <div class="admin-wrap" style="margin-top:40px">
+    <div class="login-box">
+      <h3 style="margin-bottom:24px;color:#1B5EA6">Đăng Tin Mới</h3>
+      <div class="form-group">
+        <label>Tiêu đề *</label>
+        <input type="text" id="tieuDe" placeholder="VD: Lễ hội mua sắm Tết 2026">
+      </div>
+      <div class="form-group">
+        <label>Mô tả</label>
+        <textarea id="moTa" placeholder="Mô tả chi tiết sự kiện..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Link hình ảnh (URL)</label>
+        <input type="text" id="hinhAnh" placeholder="https://...">
+      </div>
+      <div class="form-group">
+        <label>Loại tin</label>
+        <select id="loaiTin">
+          <option value="SuKien">Sự Kiện</option>
+          <option value="KhuyenMai">Khuyến Mãi</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ngày bắt đầu *</label>
+          <input type="date" id="ngayBatDau">
+        </div>
+        <div class="form-group">
+          <label>Ngày kết thúc *</label>
+          <input type="date" id="ngayKetThuc">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="submitForm()">Đăng Tin</button>
+      <div id="message"></div>
+    </div>
+
+    <!-- Danh sách tin đã đăng -->
+    <div class="login-box" style="margin-top:24px">
+      <h3 style="margin-bottom:16px;color:#1B5EA6">Tin Đã Đăng</h3>
+      <div id="tinDaDang"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_URL = 'https://starmart-api.onrender.com/api';
+
+// Tài khoản admin (đơn giản, frontend-only)
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'Starmart@2025';
+
+function login() {
+  const u = document.getElementById('username').value;
+  const p = document.getElementById('password').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    sessionStorage.setItem('adminLoggedIn', 'true');
+    loadTinDaDang();
+  } else {
+    document.getElementById('loginMsg').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('adminLoggedIn');
+  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('adminScreen').style.display = 'none';
+}
+
+async function submitForm() {
+  const tieuDe = document.getElementById('tieuDe').value.trim();
+  const ngayBatDau = document.getElementById('ngayBatDau').value;
+  const ngayKetThuc = document.getElementById('ngayKetThuc').value;
+  const msg = document.getElementById('message');
+
+  if (!tieuDe || !ngayBatDau || !ngayKetThuc) {
+    msg.className = 'msg-err';
+    msg.textContent = '❌ Vui lòng điền đủ Tiêu đề, Ngày bắt đầu, Ngày kết thúc!';
+    return;
+  }
+
+  const data = {
+    tieuDe,
+    moTa: document.getElementById('moTa').value,
+    hinhAnh: document.getElementById('hinhAnh').value,
+    loaiTin: document.getElementById('loaiTin').value,
+    ngayBatDau, ngayKetThuc,
+    trangThai: true
+  };
+
+  try {
+    const res = await fetch(`${API_URL}/SuKien`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      msg.className = 'msg-ok';
+      msg.textContent = '✅ Đăng tin thành công!';
+      document.getElementById('tieuDe').value = '';
+      document.getElementById('moTa').value = '';
+      document.getElementById('hinhAnh').value = '';
+      document.getElementById('ngayBatDau').value = '';
+      document.getElementById('ngayKetThuc').value = '';
+      loadTinDaDang();
+    } else {
+      msg.className = 'msg-err';
+      msg.textContent = '❌ Lỗi server, thử lại!';
+    }
+  } catch(e) {
+    msg.className = 'msg-err';
+    msg.textContent = '❌ Không kết nối được API!';
+  }
+}
+
+async function loadTinDaDang() {
+  const container = document.getElementById('tinDaDang');
+  const res = await fetch(`${API_URL}/SuKien`);
+  const data = await res.json();
+  container.innerHTML = data.map(t => `
+    <div style="padding:12px;border:1px solid #eee;border-radius:8px;
+      margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <span style="background:${t.loaiTin==='KhuyenMai'?'#D0021B':'#1B5EA6'};
+          color:white;padding:2px 8px;border-radius:4px;font-size:12px">
+          ${t.loaiTin}
+        </span>
+        <strong style="margin-left:8px">${t.tieuDe}</strong>
+        <span style="color:#888;font-size:12px;margin-left:8px">
+          ${new Date(t.ngayBatDau).toLocaleDateString('vi-VN')}
+        </span>
+      </div>
+      <button onclick="xoaTin(${t.id})"
+        style="background:#ff4444;color:white;border:none;padding:6px 12px;
+        border-radius:4px;cursor:pointer;font-size:12px">Xóa</button>
+    </div>`).join('');
+}
+
+async function xoaTin(id) {
+  if (!confirm('Xác nhận xóa tin này?')) return;
+  await fetch(`${API_URL}/SuKien/${id}`, { method: 'DELETE' });
+  loadTinDaDang();
+}
+
+// Kiểm tra đã đăng nhập chưa khi load trang
+if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminScreen').style.display = 'block';
+  loadTinDaDang();
+}
+</script>
+</body>
+</html>
