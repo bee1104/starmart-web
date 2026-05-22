@@ -9,7 +9,12 @@ builder.Services.AddDbContext<StarMartContext>(options =>
 
 builder.Services.AddCors(options => {
   options.AddPolicy("AllowAll", policy =>
-    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    policy.WithOrigins(
+        "https://starmartmall.vn",
+        "https://www.starmartmall.vn",
+        "http://starmartmall.vn",
+        "http://www.starmartmall.vn"
+      ).AllowAnyMethod().AllowAnyHeader());
 });
 
 builder.Services.AddControllers();
