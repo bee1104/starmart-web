@@ -61,5 +61,15 @@ namespace StarMartAPI.Controllers {
       await _context.SaveChangesAsync();
       return NoContent();
     }
+    // GET: api/SuKien/ping
+    [HttpGet("ping")]
+    public async Task<IActionResult> Test() {
+      try {
+        var count = await _context.SuKien.CountAsync();
+        return Ok(new { status = "OK", count, message = "Connected!" });
+        } catch (Exception ex) {
+          return Ok(new { status = "ERROR", message = ex.Message, inner = ex.InnerException?.Message });
+          }
+    }
   }
 }
