@@ -31,5 +31,8 @@ namespace StarMartAPI.Models {
 
     [Column("NgayTao")]
     public DateTime NgayTao { get; set; } = DateTime.Now;
+
+    [Column("NguoiDang")]
+    public string? NguoiDang { get; set; }
   }
 }

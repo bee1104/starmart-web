@@ -47,9 +47,22 @@ namespace StarMartAPI.Controllers {
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, SuKien suKien) {
       if (id != suKien.Id) return BadRequest();
-      _context.Entry(suKien).State = EntityState.Modified;
-      await _context.SaveChangesAsync();
-      return NoContent();
+
+    var existing = await _context.SuKien.FindAsync(id);
+    if (existing == null) return NotFound();
+
+    // Cập nhật các field cho phép sửa
+    existing.TieuDe      = suKien.TieuDe;
+    existing.MoTa        = suKien.MoTa;
+    existing.HinhAnh     = suKien.HinhAnh;
+    existing.LoaiTin     = suKien.LoaiTin;
+    existing.NgayBatDau  = suKien.NgayBatDau;
+    existing.NgayKetThuc = suKien.NgayKetThuc;
+    existing.TrangThai   = suKien.TrangThai;
+    // ← KHÔNG có existing.NguoiDang = ... → giữ nguyên người tạo gốc
+
+    await _context.SaveChangesAsync();
+    return NoContent();
     }
 
     // DELETE: api/SuKien/5
