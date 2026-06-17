@@ -13,7 +13,9 @@ builder.Services.AddCors(options => {
         "https://starmartmall.vn",
         "https://www.starmartmall.vn",
         "http://starmartmall.vn",
-        "http://www.starmartmall.vn"
+        "http://www.starmartmall.vn",
+        "http://localhost:5500",     
+        "http://127.0.0.1:5500"
       ).AllowAnyMethod().AllowAnyHeader());
 });
 
