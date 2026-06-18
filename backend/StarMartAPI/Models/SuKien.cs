@@ -30,7 +30,7 @@ namespace StarMartAPI.Models {
     public bool TrangThai { get; set; } = true;
 
     [Column("NgayTao")]
-    public DateTime NgayTao { get; set; } = DateTime.Now;
+    public DateTime NgayTao { get; set; } = DateTime.UtcNow;
 
     [Column("NguoiDang")]
     public string? NguoiDang { get; set; }
