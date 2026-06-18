@@ -9,14 +9,9 @@ builder.Services.AddDbContext<StarMartContext>(options =>
 
 builder.Services.AddCors(options => {
   options.AddPolicy("AllowAll", policy =>
-    policy.WithOrigins(
-        "https://starmartmall.vn",
-        "https://www.starmartmall.vn",
-        "http://starmartmall.vn",
-        "http://www.starmartmall.vn",
-        "http://localhost:5500",     
-        "http://127.0.0.1:5500"
-      ).AllowAnyMethod().AllowAnyHeader());
+    policy.AllowAnyOrigin()   
+          .AllowAnyMethod()
+          .AllowAnyHeader());
 });
 
 builder.Services.AddControllers();
@@ -25,13 +20,15 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+app.UseCors("AllowAll");
+
 app.UseSwagger();
 app.UseSwaggerUI(c => {
   c.SwaggerEndpoint("/swagger/v1/swagger.json", "StarMart API v1");
   c.RoutePrefix = "swagger";
 });
 
-app.UseCors("AllowAll");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
